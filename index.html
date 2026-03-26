@@ -69,20 +69,51 @@
             z-index: 10;
         }
 
-        .img-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
+        /* Holo Border Container */
+.img-wrapper {
+    position: relative;
+    width: 170px; /* ဓာတ်ပုံထက် နည်းနည်းပိုကြီးရမယ် */
+    height: 170px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* အပြင်ထွက်နေတဲ့ gradient တွေကို ဖျောက်ဖို့ */
+    margin-bottom: 2rem;
+    box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
+}
 
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.3);
-        }
+/* လည်နေမည့် Holo Background */
+.img-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    /* Romantic Holo Colors (Pink, Purple, Blue, Gold) */
+    background: conic-gradient(
+        #ff4d6d, #ffccd5, #c77dff, #7fb3d5, #ff4d6d
+    );
+    animation: rotateHolo 4s linear infinite;
+    z-index: 1;
+}
+
+/* ဓာတ်ပုံကို Holo ပေါ်မှာ တင်ထားခြင်း */
+.profile-img {
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white; /* ဓာတ်ပုံဘေးက အဖြူရောင် border လေး */
+    position: relative;
+    z-index: 2; /* Gradient ရဲ့ အပေါ်မှာ ရှိနေဖို့ */
+    background: white;
+}
+
+/* Rotation Animation */
+@keyframes rotateHolo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
         h1 {
             font-family: 'Dancing Script', cursive;
