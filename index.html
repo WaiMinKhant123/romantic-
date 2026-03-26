@@ -12,20 +12,39 @@
         :root {
             --primary: #ff4d6d;
             --secondary: #ffccd5;
-            --glass: rgba(255, 255, 255, 0.82);
-            --bg-gradient: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            --glass: rgba(255, 255, 255, 0.3); /* Glassmorphism အတွက် opacity လျှော့ထားပါတယ် */
+            
+            /* Pastel Colors for BG Changer */
+            --pastel-1: #FFB6C1; 
+            --pastel-2: #E6E6FA;
+            --pastel-3: #FFDAB9;
+            --pastel-4: #E0FFFF;
+            --pastel-5: #FFF0F5;
         }
 
+        /* 1. Dynamic Pastel Background Changer */
         body {
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--bg-gradient);
             font-family: 'Montserrat', 'Pyidaungsu', sans-serif;
             overflow: hidden;
             touch-action: none;
+            position: relative;
+            
+            /* Animation for smooth background transition */
+            animation: changePastelBG 20s infinite alternate linear;
+            transition: background-color 3s ease-in-out;
+        }
+
+        @keyframes changePastelBG {
+            0%   { background-color: var(--pastel-1); }
+            25%  { background-color: var(--pastel-2); }
+            50%  { background-color: var(--pastel-3); }
+            75%  { background-color: var(--pastel-4); }
+            100% { background-color: var(--pastel-5); }
         }
 
         /* Falling Sakura Background */
@@ -41,11 +60,11 @@
             to { transform: translateY(110vh) translateX(100px) rotate(720deg); }
         }
 
-        /* Interactive Particles */
+        /* Interactive Particles (Enhanced) */
         .particle {
             position: absolute;
             pointer-events: none;
-            animation: explode 0.8s ease-out forwards;
+            animation: explode 1s cubic-bezier(0, 0.9, 0.6, 1) forwards;
             z-index: 100;
         }
 
@@ -56,96 +75,95 @@
 
         /* Luxury Glass Card */
         .luxury-card {
-            background: var(--glass);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             padding: 2.5rem 2rem;
-            border-radius: 3rem;
+            border-radius: 3.5rem;
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 85%;
             max-width: 360px;
             z-index: 10;
+            transition: transform 0.3s ease;
         }
+        
+        .luxury-card:hover { transform: translateY(-10px); }
 
         /* Holo Border Container */
-.img-wrapper {
-    position: relative;
-    width: 170px; /* ဓာတ်ပုံထက် နည်းနည်းပိုကြီးရမယ် */
-    height: 170px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* အပြင်ထွက်နေတဲ့ gradient တွေကို ဖျောက်ဖို့ */
-    margin-bottom: 2rem;
-    box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
-}
+        .img-wrapper {
+            position: relative;
+            width: 175px;
+            height: 175px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
+        }
 
-/* လည်နေမည့် Holo Background */
-.img-wrapper::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    /* Romantic Holo Colors (Pink, Purple, Blue, Gold) */
-    background: conic-gradient(
-        #ff4d6d, #ffccd5, #c77dff, #7fb3d5, #ff4d6d
-    );
-    animation: rotateHolo 4s linear infinite;
-    z-index: 1;
-}
+        .img-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(#ff4d6d, #ffccd5, #c77dff, #7fb3d5, #ff4d6d);
+            animation: rotateHolo 4s linear infinite;
+            z-index: 1;
+        }
 
-/* ဓာတ်ပုံကို Holo ပေါ်မှာ တင်ထားခြင်း */
-.profile-img {
-    width: 155px;
-    height: 155px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid white; /* ဓာတ်ပုံဘေးက အဖြူရောင် border လေး */
-    position: relative;
-    z-index: 2; /* Gradient ရဲ့ အပေါ်မှာ ရှိနေဖို့ */
-    background: white;
-}
+        /* Profile Image (File location မပြောင်းလဲပါ) */
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            position: relative;
+            z-index: 2;
+            background: white;
+        }
 
-/* Rotation Animation */
-@keyframes rotateHolo {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+        @keyframes rotateHolo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            color: var(--primary);
+            color: white; /* Pastel BG ပေါ်မှာ ပိုလင်းအောင် အဖြူရောင်ပြောင်းထားပါတယ် */
             font-size: 3rem;
             margin: 10px 0;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         #typewriter-text {
             font-size: 1.1rem;
-            color: #4a4a4a;
+            color: #444;
             min-height: 70px;
             margin-bottom: 25px;
             line-height: 1.6;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* New Pretty Music Player Design */
+        /* Music Player Design */
         .player-bar {
-            background: white;
+            background: rgba(255, 255, 255, 0.4);
             padding: 12px 20px;
             border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            margin-top: 10px;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
         .play-btn {
-            background: var(--primary);
-            color: white;
+            background: white;
+            color: var(--primary);
             border: none;
             width: 48px;
             height: 48px;
@@ -155,7 +173,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
@@ -166,7 +184,7 @@
             text-align: center;
             font-size: 0.85rem;
             font-weight: 600;
-            color: #666;
+            color: #555;
             letter-spacing: 0.5px;
         }
 
@@ -190,15 +208,15 @@
         </div>
         
         <audio id="bg-music" loop>
-    <source src="music.m4a" type="audio/mp4">
+            <source src="music.m4a" type="audio/mp4">
         </audio>
     </div>
 
     <script>
-        // ၁။ Myanmar Typewriter Text Generator
+        // ၁။ Myanmar Typewriter Text (စာသားများကို နဂိုအတိုင်းထားပေးပါသည်)
         const messages = [
             "မင်းရဲ့ အပြုံးလေးတွေက သိပ်လှတာပဲ... ✨",
-           "နတ်သက်ကြွေလာတဲ့ နတ်သမီး လေးအလားပါပဲ... ❤️",
+            "နတ်သက်ကြွေလာတဲ့ နတ်သမီး လေးအလားပါပဲ... ❤️",
             "အင်းလေးသူမင်းလေးတစ်ယောက်ရဲ့ နှလုံးသားတံခါးကိုခေါက်... 💖",
             "စကားလုံးတွေနဲ့ ဖော်ပြလို့ မရအောင် မင်းကို အများကြီး ချစ်တယ်... 🌹"
         ];
@@ -214,7 +232,7 @@
                 cIdx++;
                 if (cIdx === currentMessage.length) {
                     isDeleting = true;
-                    setTimeout(type, 2500); // ပြီးရင် ခဏရပ်မယ်
+                    setTimeout(type, 2500);
                 } else {
                     setTimeout(type, 100);
                 }
@@ -231,23 +249,23 @@
             }
         }
 
-        // ၂။ Touch/Click Explosion Effects
+        // ၂။ Enhanced Touch/Click Explosion Effects
         function createExplosion(e) {
-            const x = e.clientX || e.touches[0].clientX;
-            const y = e.clientY || e.touches[0].clientY;
-            const items = ['❤️', '🌸', '✨', '💖', '💍']; 
+            const x = e.clientX || (e.touches ? e.touches[0].clientX : 0);
+            const y = e.clientY || (e.touches ? e.touches[0].clientY : 0);
+            const items = ['❤️', '🌸', '✨', '💖', '💍', '💎', '🌹']; 
             
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 18; i++) { // အရေအတွက် ပိုတိုးထားပါတယ်
                 const p = document.createElement('div');
                 p.classList.add('particle');
                 p.innerHTML = items[Math.floor(Math.random() * items.length)];
                 p.style.left = x + 'px';
                 p.style.top = y + 'px';
-                p.style.fontSize = Math.random() * 20 + 15 + 'px';
-                p.style.setProperty('--dx', (Math.random() - 0.5) * 350 + 'px');
-                p.style.setProperty('--dy', (Math.random() - 0.5) * 350 + 'px');
+                p.style.fontSize = Math.random() * 25 + 15 + 'px';
+                p.style.setProperty('--dx', (Math.random() - 0.5) * 500 + 'px');
+                p.style.setProperty('--dy', (Math.random() - 0.5) * 500 + 'px');
                 document.body.appendChild(p);
-                setTimeout(() => p.remove(), 800);
+                setTimeout(() => p.remove(), 1000);
             }
         }
 
@@ -257,7 +275,7 @@
             const music = document.getElementById('bg-music');
             const btn = document.getElementById('mBtn');
             if(!isPlaying) {
-                music.play();
+                music.play().catch(() => {});
                 btn.innerHTML = "⏸";
                 isPlaying = true;
             } else {
@@ -267,17 +285,19 @@
             }
         }
 
-        // ၄။ Background Sakura Fall Effect
+        // ၄။ Background Sakura Fall Effect (More dense)
         setInterval(() => {
             const petal = document.createElement('div');
+            const icons = ['🌸', '✨', '💮'];
             petal.className = 'petal';
-            petal.innerHTML = '🌸';
+            petal.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.fontSize = Math.random() * 20 + 10 + 'px';
-            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.opacity = Math.random() * 0.8 + 0.2;
+            petal.style.animationDuration = Math.random() * 4 + 4 + 's';
             document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), 6000);
-        }, 800);
+            setTimeout(() => petal.remove(), 8000);
+        }, 300); // Sakura ထွက်နှုန်းကို ပိုမြန်စေပါတယ်
 
         window.onload = type;
     </script>
