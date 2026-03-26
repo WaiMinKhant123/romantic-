@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Special One ❤️</title>
+    <style>
+        /* CSS Section */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Floating Hearts Animation */
+        .heart-particle {
+            position: fixed;
+            top: -10%;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) translateX(20px) rotate(360deg);
+            }
+        }
+
+        /* Main Container */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            border: 2px solid #ff4d6d;
+            z-index: 10;
+            position: relative;
+        }
+
+        .photo-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            border: 4px solid #ff4d6d;
+            padding: 5px;
+            background: white;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4d6d;
+            font-size: 2.8rem;
+            margin: 10px 0;
+        }
+
+        #message {
+            color: #594d5b;
+            font-size: 1rem;
+            min-height: 50px;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        .btn:hover {
+            background: #c9184a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(201, 24, 74, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Special Memory">
+        </div>
+        <h1 id="title">Hello Love!</h1>
+        <p id="message">Thinking of you makes my world so much brighter. ❤️</p>
+        <button class="btn" onclick="nextMessage()">Click for Surprise</button>
+    </div>
+
+    <script>
+        // JS Section
+        
+        // ၁။ အသည်းပုံလေးတွေ ကြွေကျတဲ့ Animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            const hearts = ['❤️', '💖', '💗', '💕', '🌸'];
+            heart.classList.add('heart-particle');
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // ၂။ Button နှိပ်ရင် စာသားပြောင်းပေးမယ့် Logic
+        const messages = [
+            "You are the most amazing person I know.",
+            "I'm so lucky to have you in my life.",
+            "Every moment with you is a treasure.",
+            "You are my favorite notification! 😊",
+            "I love you more than words can say! ❤️"
+        ];
+        
+        let currentMsg = 0;
+
+        function nextMessage() {
+            const msgElement = document.getElementById('message');
+            const titleElement = document.getElementById('title');
+            
+            currentMsg = (currentMsg + 1) % messages.length;
+            msgElement.innerHTML = messages[currentMsg];
+            
+            if(currentMsg === messages.length - 1) {
+                titleElement.innerHTML = "Always Yours";
+                document.querySelector('.btn').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
